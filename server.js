@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mineflayer = require('mineflayer');
 
 const app = express();
-const bots = []; // نحتفظ بالبواتات حتى تبقى متصلة
+const bots = [];
 
 app.use(bodyParser.json());
 
@@ -16,6 +16,7 @@ app.post('/start-bot', (req, res) => {
       host: serverIP,
       port: parseInt(port),
       username: botName,
+      version: '1.21.5' // 💡 نحدد الإصدار هنا
     });
 
     bot.on('login', () => {
@@ -30,8 +31,8 @@ app.post('/start-bot', (req, res) => {
       console.log(`⚠️ خطأ في البوت ${botName}:`, err.message);
     });
 
-    bots.push(bot); // نحتفظ به ليبقى متصل
-    res.json({ message: `🟢 البوت "${botName}" بدأ الاتصال بـ ${serverIP}:${port}` });
+    bots.push(bot);
+    res.json({ message: `🟢 البوت "${botName}" يحاول الاتصال بـ ${serverIP}:${port}` });
   } catch (e) {
     res.json({ message: 'فشل تشغيل البوت: ' + e.message });
   }
