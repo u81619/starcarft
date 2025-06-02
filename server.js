@@ -1,10 +1,9 @@
-// server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const mineflayer = require('mineflayer');
 
 const app = express();
-const bots = [];
+const bots = []; // قائمة البوتات المتصلة
 
 app.use(bodyParser.json());
 
@@ -16,7 +15,8 @@ app.post('/start-bot', (req, res) => {
       host: serverIP,
       port: parseInt(port),
       username: botName,
-      version: '1.21.5' // 💡 نحدد الإصدار هنا
+      version: '1.21.5',    // 💡 تأكد أن السيرفر يدعم هذا الإصدار
+      auth: 'offline'       // ✅ وضع المكرك
     });
 
     bot.on('login', () => {
@@ -24,20 +24,20 @@ app.post('/start-bot', (req, res) => {
     });
 
     bot.on('end', () => {
-      console.log(`❌ البوت "${botName}" تم فصله من السيرفر`);
+      console.log(`❌ البوت "${botName}" تم فصله`);
     });
 
     bot.on('error', err => {
-      console.log(`⚠️ خطأ في البوت ${botName}:`, err.message);
+      console.log(`⚠️ خطأ: ${err.message}`);
     });
 
     bots.push(bot);
-    res.json({ message: `🟢 البوت "${botName}" يحاول الاتصال بـ ${serverIP}:${port}` });
+    res.json({ message: `🟢 البوت "${botName}" يحاول دخول ${serverIP}:${port}` });
   } catch (e) {
-    res.json({ message: 'فشل تشغيل البوت: ' + e.message });
+    res.status(500).json({ message: '❌ فشل في تشغيل البوت: ' + e.message });
   }
 });
 
 app.listen(3000, () => {
-  console.log('🚀 الخادم يعمل على http://localhost:3000');
+  console.log('🚀 السيرفر شغال على http://localhost:3000');
 });
