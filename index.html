@@ -1,1 +1,127 @@
-
+<!DOCTYPE html><html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=yes">
+  <title>أداة التشفير وفك التشفير - 4GAMER</title>
+  <meta name="keywords" content="تشفير, فك التشفير, AES, DES, RC4, Rabbit, TripleDes">
+  <meta name="description" content="أداة تشفير وفك تشفير تدعم خوارزميات متعددة عبر الإنترنت">
+  <link rel="shortcut icon" href="static/img/common/favicon.ico" type="image/x-icon">
+  <link rel="bookmark" href="static/img/common/favicon.ico">
+  <link id="bootstrapCss" rel="stylesheet" href="static/components/bootstrap/css/bootstrap.min.css">
+  <link href="static/css/common/main.css?v=182" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="static/js/common/common.js"></script>
+  <script type="text/javascript" src="static/js/common/lang/ar.js?v=010" charset="utf-8"></script>
+  <script type="text/javascript" src="static/js/common/main/iodraw.js?v=119" charset="utf-8"></script>
+</head>
+<body class="loading">
+<input type="hidden" id="contentId" value="220910105543781803"/>
+<input type="hidden" id="contentTitle" value="نص التشفير وفك التشفير"/>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><strong>4GAMER</strong></a>
+    </div>
+  </div>
+</nav>
+<div class="container" id="iodrawContainer">
+  <div class="panel panel-default" id="toolPanel">
+    <div class="panel-heading form-inline">
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <span class="glyphicon glyphicon-tasks"></span>
+        <div class="toolName">
+          <h1 class="panel-title">أداة التشفير وفك التشفير</h1>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <div class="col-sm-12">
+            <textarea id="fromText" autofocus="autofocus" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="form-group" id="pwdDiv">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon" data-lang="tool_encrypt_pwd"></span>
+              <input type="text" id="pwd" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <div class="input-group-addon">
+                <span class="input-group-text" data-lang="tool_encrypt_type"></span>
+              </div>
+              <select id="encrypt_type" class="form-control" onchange="optionChange()">
+                <option value="aes">AES</option>
+                <option value="des">DES</option>
+                <option value="rc4">RC4</option>
+                <option value="rabbit">Rabbit</option>
+                <option value="tripledes">TripleDes</option>
+                <option value="MD5" class="encrypt">MD5</option>
+                <option value="HmacMD5" class="encrypt">HmacMD5</option>
+                <option value="SHA1" class="encrypt">SHA1</option>
+                <option value="HmacSHA1" class="encrypt">HmacSHA1</option>
+                <option value="SHA256" class="encrypt">SHA256</option>
+                <option value="HmacSHA256" class="encrypt">HmacSHA256</option>
+                <option value="SHA3" class="encrypt">SHA3</option>
+                <option value="HmacSHA512" class="encrypt">HmacSHA512</option>
+                <option value="RIPEMD160" class="encrypt">RIPEMD160</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <label class="radio-inline">
+              <input type="radio" name="option_type" value="encrypt" checked="checked" onclick="optionChange()">
+              <span data-lang="tool_common_encrypt"></span>
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="option_type" value="decrypt" onclick="optionChange()">
+              <span data-lang="tool_common_decrypt"></span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-lang="tool_common_start" onclick="startTrans()"></button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <textarea id="toText" class="form-control" style="display:none;" readonly></textarea>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript" src="static/js/tool/encrypt.js"></script>
+    </div>
+  </div>
+  <h2>نبذة عن الأداة</h2>
+  <div id="toolDescription">
+    <p><strong>أداة تشفير وفك تشفير عبر الإنترنت</strong></p>
+    <p>تدعم خوارزميات AES, DES, RC4, Rabbit, و TripleDes.</p>
+    <p><strong>تنويه:</strong> يُنصح باستخدام مفتاح خاص للحماية من فك التشفير من قبل الآخرين.</p>
+  </div>
+</div>
+<div class="container text-center" style="margin-top: 30px;">
+  <p>© 2025 4GAMER - جميع الحقوق محفوظة</p>
+</div>
+<script>
+  $("*[data-lang]").each(function() {
+    let ele = $(this);
+    let key = ele.attr("data-lang");
+    let value = window[key];
+    ele.text(value);
+  });
+  $("*[data-lang-placeholder]").each(function() {
+    let ele = $(this);
+    let key = ele.attr("data-lang-placeholder");
+    let value = window[key];
+    ele.prop('placeholder', value);
+  });
+</script>
+</body>
+</html>
